@@ -24,8 +24,14 @@ const alias = Object.assign({}, {
 	// 组件
 	'components': path.join(devPath, 'components'),
 
+  // 部件
+  'widgets': path.join(devPath, 'components', 'widgets'),
+
   // action
   'action': path.join(devPath, 'action'),
+
+	// constants
+	'constants': path.join(devPath, 'constants'),
 
   // reducers
   'reducers': path.join(devPath, 'reducers'),

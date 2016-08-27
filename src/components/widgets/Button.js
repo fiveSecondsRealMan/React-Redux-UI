@@ -10,30 +10,21 @@ import 'styles/button';
 
 class Button extends Component {
   disable() {
-		const { disableAction } = { this.props.action };
-		disableAction.apply(this, true);
+		const { btnDisable } = { this.props.action };
+		btnDisable.call(this, true);
   }
 
-	enable(...args) {
-		const { enableAction } = { this.props.action };
-		enableAction.apply(this, false);
-	}
-
-  fetch() {
-		this.props.eventHandle();
-  }
-
-	interactive() {
-		this.props.eventHandle();
+	enable() {
+		const { btnEnable } = { this.props.action };
+		btnEnable.call(this, false);
 	}
 
 	handleClick() {
-		if (this.multied) {
-		  this.fetch();
-			this.disable();
-		} else {
-			this.interactive();			
-		}
+		const { multied, eventHandle } = this.props;
+
+		multied && this.disable();
+
+		this.eventHandle();
 	}
 
   render() {
@@ -48,7 +39,6 @@ class Button extends Component {
 		  { children  }			
 			</button> 
 		);
-				 
   }
 }
 
