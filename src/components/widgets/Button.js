@@ -45,9 +45,7 @@ class Button extends Component {
 				style={ style }
 				onClick={ this.handleClick  }
 				disabled={ disabled }>
-
 		  { children  }			
-
 			</button> 
 		);
 				 
