@@ -9,7 +9,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "cd build & babel-node webpack.dev.js"
+    "dev": "cd build && babel-node webpack.dev.js"
   },
   "repository": {
     "type": "git",
