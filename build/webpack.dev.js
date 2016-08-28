@@ -27,10 +27,43 @@ devWebpackConfig.entry.app.unshift('webpack-dev-server/client?' + domain);
 devWebpackConfig.output.filename = 'bundle.js';
 
 // 设置静态资源目录替换
-devWebpackConfig.output.publicPath = domain + '/dist/';
+devWebpackConfig.output.publicPath = domain + '/';
 
+// 设置断点调试
+devWebpackConfig.debug = true;
+devWebpackConfig.devtool = 'eval-source-map';
 
-(new WebpackDevServer()).listen(port, host, () => {
+// 热替换和自动刷新
+devWebpackConfig.devServer = {
+	hot: true,
+  inline: true,
+  historyApiFallback: true,
+	contentBase: '../dist'
+};
+
+/*// eslint 检测代码规范
+devWebpackConfig
+	.module
+	.preLoaders
+	.push({
+		test: /\.js$/,
+		exclude: /node_modules/,
+		loader: 'eslint'
+	});
+devWebpackConfig.eslint = { configFile: '../.eslint.js' };*/
+//console.log(devWebpackConfig);
+
+(new WebpackDevServer(
+  webpack(devWebpackConfig),
+	{
+		stats: {
+			colors: true
+		}
+	}
+)).listen(port, host, () => {
 	console.log('webpack dev is root');
 });
+/*webpack(devWebpackConfig, () => {
+  console.log('wjj');
+});*/
 

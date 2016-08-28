@@ -15,7 +15,7 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 const rootPath = path.join(__dirname);
 const devPath = path.join(rootPath, '..', 'src');
-const distPath = path.join(rootPath, '..', 'src');
+const distPath = path.join(rootPath, '..', 'dist');
 
 /**
   别名
@@ -31,7 +31,7 @@ const alias = Object.assign({}, {
   'reducers': path.join(devPath, 'reducers'),
 
 	// store  
-	'store': path.join(devPath, 'store)
+	'store': path.join(devPath, 'store')
 });
 
 export default {
@@ -57,6 +57,7 @@ export default {
   },
 
   module: {
+		preLoaders: [],
     loaders: [
 			{
 				'test': /\.jsx?$/i,
