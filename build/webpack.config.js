@@ -24,29 +24,35 @@ const alias = Object.assign({}, {
 	// 组件
 	'components': path.join(devPath, 'components'),
 
-  // action 
- 'action': path.join(devPath, 'action'),
+  // action
+  'action': path.join(devPath, 'action'),
 
   // reducers
   'reducers': path.join(devPath, 'reducers'),
 
-	// store  
-	'store': path.join(devPath, 'store')
+	// store
+	'store': path.join(devPath, 'store'),
+
+	// styles
+	'styles': path.join(devPath, 'statics/styles'),
+
+	// scripts
+	'scripts': path.join(devPath, 'statics/scripts')
 });
 
 export default {
   // 入口文件目录
   context: devPath,
- 
+
   // 入口文件信息
   entry: {
-    'app': ['./app.js']    
+    'app': ['./app.js']
   },
-  
+
   // 输出文件信息
   output: {
     'path': distPath,
-    'chunkFilename': '[id].[chunkhash].js'	
+    'chunkFilename': '[id].[chunkhash].js'
   },
 
   resolve: {
@@ -76,7 +82,7 @@ export default {
 				'test': /\.css/i,
 				'loader': 'style!css',
 				'include': devPath
-			}	    	  
+			}
     ]
   },
 
@@ -89,6 +95,6 @@ export default {
 			files: {
 				css: ['bundle.css']
 			}
-		})	
+		})
 	]
 };
