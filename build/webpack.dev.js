@@ -11,7 +11,7 @@ import webpackConfig from './webpack.config.js';
 
 /**
  域名
- 协议、主机、端口 
+ 协议、主机、端口
 **/
 const protocol = 'http';
 const host = 'localhost';
@@ -36,9 +36,7 @@ devWebpackConfig.devtool = 'eval-source-map';
 // 热替换和自动刷新
 devWebpackConfig.devServer = {
 	hot: true,
-  inline: true,
-  historyApiFallback: true,
-	contentBase: '../dist'
+  inline: true
 };
 
 /*// eslint 检测代码规范
@@ -66,4 +64,3 @@ devWebpackConfig.eslint = { configFile: '../.eslint.js' };*/
 /*webpack(devWebpackConfig, () => {
   console.log('wjj');
 });*/
-
