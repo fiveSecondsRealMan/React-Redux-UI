@@ -10,12 +10,12 @@ import 'styles/button';
 
 class Button extends Component {
   disable() {
-		const { btnDisable } = { this.props.action };
+		const btnDisable = this.props.btnDisable;
 		btnDisable.call(this, true);
   }
 
 	enable() {
-		const { btnEnable } = { this.props.action };
+		const btnEnable = this.props.btnEnable;
 		btnEnable.call(this, false);
 	}
 
@@ -24,19 +24,20 @@ class Button extends Component {
 
 		multied && this.disable();
 
-		this.eventHandle();
+		eventHandle.call(this);
 	}
 
   render() {
 		const { type, className, style, children, disabled } = this.props;
 
 		return (
-			<button type={ type } 
+			<button 
+				type={ type } 
 				className={ className }  
 				style={ style }
-				onClick={ this.handleClick  }
+				onClick={ this.handleClick.bind(this) }
 				disabled={ disabled }>
-		  { children  }			
+		  { children }			
 			</button> 
 		);
   }
