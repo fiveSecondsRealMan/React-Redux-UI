@@ -24,8 +24,17 @@ const alias = Object.assign({}, {
 	// 组件
 	'components': path.join(devPath, 'components'),
 
+  // 部件
+  'widgets': path.join(devPath, 'components', 'widgets'),
+
+	// 页面
+	'containers': path.join(devPath, 'containers'),
+
   // action
   'action': path.join(devPath, 'action'),
+
+	// constants
+	'constants': path.join(devPath, 'constants'),
 
   // reducers
   'reducers': path.join(devPath, 'reducers'),
@@ -91,7 +100,7 @@ export default {
 		new HtmlPlugin({
 			filename: 'index.html',
 			inject: true,
-			template: path.join(devPath, 'pages', 'index.html'),
+			template: path.join(rootPath, '..', 'index.html'),
 			files: {
 				css: ['bundle.css']
 			}
