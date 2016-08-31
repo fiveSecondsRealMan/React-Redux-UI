@@ -19,3 +19,10 @@ export const ENABLE_BTN = 'ENABLE_BTN';
 
 export const CHECK_CBOX = 'CHECK_CBOX';
 export const UNCHECK_CBOX = 'UNCHECK_CBOX';
+
+
+/**
+ radiobox(单选框)前端交互
+ **/
+export const CHECK_RADIO = 'CHECK_RADIO'; 
+export const UNCHECK_RADIO = 'UNCHECK_RADIO';

@@ -7,21 +7,27 @@
 
 import React, { Component, PropTypes } from 'react';
 
-class CheckBox extends Component {
+class Checkbox extends Component {
   handleChange(e) {
     const { readOnly, changeEventHandle, value } = this.props;
 
     if (readOnly)
       return;
 		
-		const checked = e.target.checked;
-		this.check(checked);
-		changeEventHandle && changeEventHandle.call(this, value, checked);
+		this.check();
+
+		if (changeEventHandle) {
+			setTimeout(() => {
+				const { checked } = this.props;
+
+				changeEventHandle.call(this, value, checked);
+			}, 0);
+		}
   }
 	
-	check(checked) {
-		const { cboxCheck, cboxUnCheck } = this.props;
-		checked ? cboxCheck(true) : cboxUnCheck(false);
+	check() {
+		const { cboxCheck, cboxUnCheck, checked } = this.props;
+		!checked ? cboxCheck(true) : cboxUnCheck(false);
 	}
 
   render() {
@@ -49,7 +55,7 @@ class CheckBox extends Component {
   }
 }
 
-CheckBox.propTypes = {
+Checkbox.propTypes = {
 	cboxCheck: PropTypes.func,												// 选中动作
 	cboxUnCheck: PropTypes.func,										  // 取消选中动作
   className: PropTypes.string,                      // class名
@@ -59,10 +65,10 @@ CheckBox.propTypes = {
   changeEventHandle: PropTypes.func                 // 选中状态改变处理器
 };
 
-CheckBox.defaultProps = {
+Checkbox.defaultProps = {
   type: 'checkbox',                                 // checkbox 单选框
   checked: false,                                   // 不选中
   readOnly: false                                   // 可进行选中操作
 }
 
-export default CheckBox;
+export default Checkbox;

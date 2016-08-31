@@ -11,11 +11,13 @@ import storeCreator from 'store';
 import * as actionCreator from 'action/actionCreator';
 import Button from 'partials/Button';
 import Checkbox from 'partials/Checkbox';
+import Radio from 'partials/Radio';
 
 // 初始化state
 const initialState = {
 		buttonDisabled: false,
-		checkboxChecked: false
+		checkboxChecked: false,
+		radioChecked: false
 };
 
 // 定义store
@@ -57,7 +59,24 @@ const renderCheckbox = () => {
 	);
 };
 
-//render();
-renderCheckbox();
+const renderRadio = () => {
+	const state = store.getState();
 
-store.subscribe(renderCheckbox);
+	ReactDOM.render(
+		<Radio
+			className="radio"
+			changeEventHandle = { function (value, checked) { console.log(value + ' : ' + checked); } }
+			value='girl'
+			checked={ state.radioChecked === void 0 ? false : state.radioChecked }
+			text='女孩'
+			{ ...action } >
+		</Radio>,
+		document.getElementById('app')
+	);
+};
+
+//render();
+//renderCheckbox();
+renderRadio();
+
+store.subscribe(renderRadio);
