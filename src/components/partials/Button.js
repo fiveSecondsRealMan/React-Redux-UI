@@ -1,6 +1,5 @@
 /**
-  部件
-  Button(按钮)
+  Button(按钮) | 不可再分组件
 **/
 
 'use strict';
@@ -27,7 +26,7 @@ class Button extends Component {
 	}
 
   render() {
-		const { type, className, style, children, disabled } = this.props;
+		const { type, className, style, text, disabled } = this.props;
 
 		return (
 			<button
@@ -36,7 +35,7 @@ class Button extends Component {
 				style={ style }
 				onClick={ this.handleClick.bind(this) }
 				disabled={ disabled }>
-		  { children }
+		  { text }
 			</button>
 		);
   }
@@ -48,11 +47,11 @@ class Button extends Component {
 Button.propTypes = {
   btnDisable: PropTypes.func,                                  // 禁用action
   btnEnable: PropTypes.func,                                   // 可永action
-  children: PropTypes.string,             										 // 显示信息
+  text: PropTypes.string,             										     // 文本
   className: PropTypes.string,            										 // class名
 	style: PropTypes.object,																		 // 样式对象
  	type: PropTypes.oneOf(['submit', 'button']),                 // 按钮类型
-	clickEventHandle: PropTypes.func,            										 // 事件处理程序
+	clickEventHandle: PropTypes.func,            								 // 事件处理程序
   disabled: PropTypes.bool,               										 // 是否禁用
 	multied: PropTypes.bool																		   // 是否多次点击
 };

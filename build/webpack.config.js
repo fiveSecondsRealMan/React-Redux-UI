@@ -46,7 +46,10 @@ const alias = Object.assign({}, {
 	'styles': path.join(devPath, 'statics/styles'),
 
 	// scripts
-	'scripts': path.join(devPath, 'statics/scripts')
+	'scripts': path.join(devPath, 'statics/scripts'),
+
+	// utils
+	'utils': path.join(devPath, 'utils')
 });
 
 export default {
