@@ -12,9 +12,9 @@ import {
 export default (state = false, action) => {
 	switch (action.type) {
 		case DISABLE_BTN:
-				return true;
+				return action.disabled;
 		case ENABLE_BTN:
-				return false
+				return action.disabled;
 		default:
 			return state;
 	} 	  

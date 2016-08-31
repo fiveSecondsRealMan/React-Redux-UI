@@ -8,15 +8,21 @@
 import React, { Component, PropTypes } from 'react';
 
 class CheckBox extends Component {
-  handleChange() {
-    const { readOnly, changeEventHandle } = this.props;
+  handleChange(e) {
+    const { readOnly, changeEventHandle, value } = this.props;
 
     if (readOnly)
       return;
-
-
-
+		
+		const checked = e.target.checked;
+		this.check(checked);
+		changeEventHandle && changeEventHandle.call(this, value, checked);
   }
+	
+	check(checked) {
+		const { cboxCheck, cboxUnCheck } = this.props;
+		checked ? cboxCheck(true) : cboxUnCheck(false);
+	}
 
   render() {
     const {
@@ -34,22 +40,18 @@ class CheckBox extends Component {
         <input
           type={ type }
           value={ value }
-          readonly={ readOnly }
+          readOnly={ readOnly }
           checked={ checked }
           onChange={ this.handleChange.bind(this) } />
         { text }
       </label>
     );
   }
-
-  setValue() {
-    const {  }
-  }
 }
 
 CheckBox.propTypes = {
-  cboxCheck: PropTypes.func,                        // 选中action
-  cboxUnCheck: PropTypes.func,                      // 不选中action
+	cboxCheck: PropTypes.func,												// 选中动作
+	cboxUnCheck: PropTypes.func,										  // 取消选中动作
   className: PropTypes.string,                      // class名
   style: PropTypes.object,                          // 样式对象
   text: PropTypes.string,                           // 文本
