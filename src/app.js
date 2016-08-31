@@ -9,7 +9,7 @@ import ReactDOM from 'react-dom';
 import { bindActionCreators } from 'redux';
 import storeCreator from 'store';
 import * as actionCreator from 'action/actionCreator';
-import Button from 'widgets/Button';
+import Button from 'partials/Button';
 
 // 初始化state
 const initialState = {
@@ -28,16 +28,15 @@ const render = () => {
   ReactDOM.render(
 		<Button
 			type="button"
-			className="btn"
-			style={{ display: 'inline-block' }}
-			eventHandle={ function () { alert('挖掘机');} }
+			className="btn btn-info download"
+			clickEventHandle={ function () { alert('挖掘机');} }
 			disabled={ state.buttonDisabled === void 0 ? false : state.buttonDisabled  }
 			multied={ true }
 			{ ...action }>
-			primary
+			下一步
 		</Button>,
 		document.getElementById('app')
-	)        
+	)
 }
 
 render();

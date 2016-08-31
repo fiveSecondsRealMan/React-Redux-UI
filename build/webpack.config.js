@@ -24,8 +24,8 @@ const alias = Object.assign({}, {
 	// 组件
 	'components': path.join(devPath, 'components'),
 
-  // 部件
-  'widgets': path.join(devPath, 'components', 'widgets'),
+  // 局部组件(不可在分组件)
+  'partials': path.join(devPath, 'components', 'partials'),
 
 	// 页面
 	'containers': path.join(devPath, 'containers'),

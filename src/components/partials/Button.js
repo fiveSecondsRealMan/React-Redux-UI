@@ -10,35 +10,34 @@ import 'styles/button';
 
 class Button extends Component {
   disable() {
-		const btnDisable = this.props.btnDisable;
+		const { btnDisable } = this.props;
 		btnDisable.call(this, true);
   }
 
 	enable() {
-		const btnEnable = this.props.btnEnable;
+		const { btnEnable } = this.props.btnEnable;
 		btnEnable.call(this, false);
 	}
 
 	handleClick() {
-		const { multied, eventHandle } = this.props;
+		const { multied, clickEventHandle } = this.props;
 
 		multied && this.disable();
-
-		eventHandle.call(this);
+		clickEventHandle.call(this);
 	}
 
   render() {
 		const { type, className, style, children, disabled } = this.props;
 
 		return (
-			<button 
-				type={ type } 
-				className={ className }  
+			<button
+				type={ type }
+				className={ className }
 				style={ style }
 				onClick={ this.handleClick.bind(this) }
 				disabled={ disabled }>
-		  { children }			
-			</button> 
+		  { children }
+			</button>
 		);
   }
 }
@@ -47,12 +46,13 @@ class Button extends Component {
   组件接收的props
 **/
 Button.propTypes = {
-  action: PropTypes.object,               										 // 组件发生交互的动作
+  btnDisable: PropTypes.func,                                  // 禁用action
+  btnEnable: PropTypes.func,                                   // 可永action
   children: PropTypes.string,             										 // 显示信息
   className: PropTypes.string,            										 // class名
 	style: PropTypes.object,																		 // 样式对象
  	type: PropTypes.oneOf(['submit', 'button']),                 // 按钮类型
-	eventHandle: PropTypes.func,            										 // 事件处理程序
+	clickEventHandle: PropTypes.func,            										 // 事件处理程序
   disabled: PropTypes.bool,               										 // 是否禁用
 	multied: PropTypes.bool																		   // 是否多次点击
 };
