@@ -21,4 +21,23 @@ for (const { index, value } of types) {
 	class2type['[Object ' + newValue + ']'] = value;
 }
 
-export default any => {}
+export default any => {
+	if (any == null)
+		return '' + any;
+	
+	const type = nativeToString.call(any);
+	
+	if (!(type in class2type)) {
+		// Window对象
+		if (any.self === any) 
+			return 'window';
+
+		// HTMLElement对象
+		if (HTMLElement.prototype.isPrototypeOf(any))
+			return 'element';	
+	}
+
+	return class2type[type];
+
+
+}

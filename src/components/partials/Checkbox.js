@@ -18,9 +18,9 @@ class Checkbox extends Component {
 
 		if (changeEventHandle) {
 			setTimeout(() => {
-				const { checked } = this.props;
+				const { checked, index } = this.props;
 
-				changeEventHandle.call(this, value, checked);
+				changeEventHandle.call(this, value, checked, index);
 			}, 0);
 		}
   }
@@ -62,6 +62,7 @@ Checkbox.propTypes = {
   style: PropTypes.object,                          // 样式对象
   text: PropTypes.string,                           // 文本
   value: PropTypes.string,                          // value
+	index: PropTypes.number,													// 索引
   changeEventHandle: PropTypes.func                 // 选中状态改变处理器
 };
 
