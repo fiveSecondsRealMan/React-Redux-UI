@@ -9,7 +9,6 @@
  **/
 
 export const DISABLE_BTN = 'DISABLE_BTN';
-
 export const ENABLE_BTN = 'ENABLE_BTN';
 
 
@@ -20,9 +19,16 @@ export const ENABLE_BTN = 'ENABLE_BTN';
 export const CHECK_CBOX = 'CHECK_CBOX';
 export const UNCHECK_CBOX = 'UNCHECK_CBOX';
 
+/**
+ checkbox(复选框组)前端交互
+ **/
+
+export const CHECK_CBOXGROUP = 'CHECK_CBOXGROUP';
+export const UNCHECK_CBOXGROUP = 'UNCHECK_CBOXGROUP';
+
 
 /**
  radiobox(单选框)前端交互
  **/
-export const CHECK_RADIO = 'CHECK_RADIO'; 
+export const CHECK_RADIO = 'CHECK_RADIO';
 export const UNCHECK_RADIO = 'UNCHECK_RADIO';

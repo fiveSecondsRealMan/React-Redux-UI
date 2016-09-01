@@ -9,36 +9,64 @@ import {
 	ENABLE_BTN,
 	CHECK_CBOX,
 	UNCHECK_CBOX,
+	CHECK_CBOXGROUP,
+	UNCHECK_CBOXGROUP,
 	CHECK_RADIO,
 	UNCHECK_RADIO
 } from 'constants/actionType';
 
-export const btnDisable = disabled => ({
-	type: DISABLE_BTN,
-	disabled
-});
+export function btnDisable (disabled) {
+	return {
+		type: DISABLE_BTN,
+		disabled
+	};
+}
 
-export const btnEnable = disabled => ({
-	type: ENABLE_BTN,
-	disabled
-});
+export function btnEnable (disabled) {
+	return {
+		type: ENABLE_BTN,
+		disabled
+	};
+}
 
-export const cboxCheck = checked => ({
-	type: CHECK_CBOX,
-	checked
-});
+export function cboxCheck (checked) {
+	return {
+		type: CHECK_CBOX,
+		checked
+	}
+}
 
-export const cboxUnCheck = checked => ({
-	type: UNCHECK_CBOX,
-	checked
-});
+export function cboxUnCheck (checked) {
+	return {
+		type: UNCHECK_CBOX,
+		checked
+	};
+}
 
-export const radioCheck = checked => ({
-	type: CHECK_RADIO,
-	checked
-});
+export function cboxGroupCheck (values) {
+	return {
+		type: CHECK_CBOXGROUP,
+		values
+	}
+}
 
-export const radioUnCheck = checked => ({
-	type: UNCHECK_RADIO,
-	checked
-});
+export function cboxGroupUnCheck (values) {
+	return {
+		type: UNCHECK_CBOXGROUP,
+		values
+	};
+}
+
+export function radioCheck (checked) {
+	return {
+		type: CHECK_RADIO,
+		checked
+	}
+};
+
+export function radioUnCheck (checked) {
+  return {
+		type: UNCHECK_RADIO,
+		checked
+	};
+};

@@ -6,37 +6,59 @@
 
 import React, { Component, PropTypes } from 'react';
 import Checkbox from 'partials/Checkbox';
-import { class2type, objectDeal, stringDeal } from 'utils';
+import { getType, objectToArray, values, replacePlaceholder, valuesToArray } from 'utils';
 
 class CheckboxGroup extends Component {
-	constructor() {
-		this.data = this.formatData();
-		this.values = {};
+	constructor(props) {
+		super(props);
+		this.initial();
 	}
 
-  formatData() {
-    let { 
-			data, 
-			textTpl, 
-			valueTpl, 
-			defaultCheckedValue,
-			separator } = this.props;
+	initial(nextProps) {
+		this.defaultCheckedValues = this.initDefaultCheckedValues(nextProps);
+		this.data = this.formatData(nextProps);
+	}
 
-		// 如果defaultCheckedValue为字符串
-		if (class2type(defaultCheckedValue) === 'string')
-			defaultCheckedValue = defaultCheckedValue.split(separator); 
+	componentWillReceiveProps(nextProps) {
+		this.initial(nextProps);
+	}
+
+	formatDefaultCheckedValues(nextProps) {
+		const { defaultCheckedValues, separator } = (nextProps || this.props);
+
+		return getType(defaultCheckedValues) === 'string'
+			? defaultCheckedValues.split(separator)
+			: defaultCheckedValues;
+	}
+
+	initDefaultCheckedValues() {
+		const defaultCheckedValues = this.formatDefaultCheckedValues();
+		const result = new Map();
+
+		result.length = defaultCheckedValues.length;
+		defaultCheckedValues.forEach((item, index) => {
+			result.set(index, item);
+		});
+
+		return result;
+	}
+
+  formatData(nextProps) {
+    let {data, textTpl, valueTpl } = (nextProps || this.props);
 
     // 如果data是对象
-    if (class2type(data) === 'object') 
-			data = objectDeal.objectToArray(data, 'value', 'text');
-		
+    if (getType(data) === 'object')
+			data = objectToArray(data, 'value', 'text');
+
 		data = data.map((item, index) => {
-			item.$text = stringDeal.replacePlaceholder(textTpl, item);
-			item.$value = stringDeal.replacePlaceholder(valueTpl, item);
+			item.$text = replacePlaceholder(textTpl, item);
+			item.$value = replacePlaceholder(valueTpl, item);
 			item.$key = item.id || this.createID(index);
-			item.$checked = defaultCheckedValue.indexOf(item.$value) >= 0; 
+			item.$checked = valuesToArray(this.defaultCheckedValues).indexOf(item.$value) >= 0;
+
+			return item;
 		});
-		
+    console.log(data, 'ggg');
 		return data;
   }
 
@@ -45,34 +67,41 @@ class CheckboxGroup extends Component {
 	}
 
 	setValues(value, checked, checkboxIndex) {
-		if (checked) 
-	  	this.values[checkboxIndex] = value;
-		else
-			delete this.values[checkboxIndex];
+		if (checked)
+			this.defaultCheckedValues.delete(checkboxIndex);
+		else {
+			this.defaultCheckedValues.set(checkboxIndex, value);
+		}
 	}
 
 	handleChange(value, checked, checkboxIndex) {
-		const { changeEventHandle } = this.props;
-		
+		const { cboxGroupCheck, separator } = this.props;
 		this.setValues.apply(this, arguments);
-		changeEventHandle && changeEventHandle(this.values);
+		// console.log(Array
+		// .prototype
+		// .slice
+		// .call(this.defaultCheckedValues)
+		// .join(separator), 'wjj');
+		console.log(valuesToArray(this.defaultCheckedValues).join(separator), 'gg');
+		cboxGroupCheck(
+			valuesToArray(this.defaultCheckedValues).join(separator)
+		);
 	}
 
   renderItems() {
 		const { readOnly, cboxCheck, cboxUnCheck } = this.props;
 
-		return this.data.map((item, index) => 
+		return this.data.map((item, index) =>
 			<Checkbox
 				key={ item.$key }
 				readOnly={ readOnly }
 				changeEventHandle={ this.handleChange.bind(this) }
 				checked={ item.$checked }
 				text={ item.$text }
+				autoFlush={ false }
 				index={ index }
-				value={ item.$value }
-				cboxCheck={ cboxCheck }
-				cboxUnCheck={ cboxUnCheck }>
-			</Checkbox>	
+				value={ item.$value }>
+			</Checkbox>
 		);
   }
 
@@ -85,7 +114,6 @@ class CheckboxGroup extends Component {
 			</div>
 		);
   }
-
 }
 
 CheckboxGroup.propTypes = {
@@ -100,16 +128,17 @@ CheckboxGroup.propTypes = {
     'horizontal',
     'vertical'
   ]),
-	defaultCheckedValue: PropTypes.oneOfType([ // 默认选中value为defaultCheckedValue指定的值的checkbox
+	defaultCheckedValues: PropTypes.oneOfType([ // 默认选中value为defaultCheckedValue指定的值的checkbox
 		PropTypes.string,
 		PropTypes.array
-	]), 
-  changeEventHandle: PropTypes.func				  // change event trigger
+	]),
+  changeEventHandle: PropTypes.func,				  // change event trigger
+	cboxGroupCheck: PropTypes.func
 };
 
 CheckboxGroup.defaultProps = {
   data: [],
-	defaultCheckedValue: [],
+	defaultCheckedValues: '',
 	separator: '|',
   order: 'horizontal',
   checked: false,

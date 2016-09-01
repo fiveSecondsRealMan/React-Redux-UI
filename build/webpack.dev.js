@@ -31,7 +31,7 @@ devWebpackConfig.output.publicPath = domain + '/';
 
 // 设置断点调试
 devWebpackConfig.debug = true;
-devWebpackConfig.devtool = 'eval-source-map';
+devWebpackConfig.devtool = '#eval-source-map';
 
 // 热替换和自动刷新
 devWebpackConfig.devServer = {
