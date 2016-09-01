@@ -2,4 +2,6 @@
   utils 入口文件
 **/
 
-import const class2type from './class2type';
+export const class2type from './class2type';
+export const objectDeal from './objectDeal';
+export const stringDeal from './stringDeal';
