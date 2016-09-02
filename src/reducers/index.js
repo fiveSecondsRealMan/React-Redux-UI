@@ -5,12 +5,14 @@
  'use strict';
 
 import { combineReducers } from 'redux';
-import buttonDisabled from './buttonDisabled.js';
-import checkboxChecked from './checkboxChecked.js';
-import radioChecked from './radioChecked.js';
+import buttonDisabled from './buttonDisabled';
+import checkboxChecked from './checkboxChecked';
+import radioChecked from './radioChecked';
+import checkboxGroupDefaultValues from './checkboxGroupDefaultValues';
 
-export default combineReducers({ 
+export default combineReducers({
 	buttonDisabled,
 	checkboxChecked,
-	radioChecked
+	radioChecked,
+  checkboxGroupDefaultValues
 });

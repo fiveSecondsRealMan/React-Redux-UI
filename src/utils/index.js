@@ -2,6 +2,7 @@
   utils 入口文件
 **/
 
-export const class2type from './class2type';
-export const objectDeal from './objectDeal';
-export const stringDeal from './stringDeal';
+export { getType } from './getType';
+export { objectToArray, values } from './objectDeal';
+export { replacePlaceholder } from './stringDeal';
+export { valuesToArray } from './mapDeal';

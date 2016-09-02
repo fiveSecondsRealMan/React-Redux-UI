@@ -9,22 +9,22 @@ import React, { Component, PropTypes } from 'react';
 
 class Checkbox extends Component {
   handleChange(e) {
-    const { readOnly, changeEventHandle, value } = this.props;
+    const { readOnly, changeEventHandle, value, autoFlush } = this.props;
 
     if (readOnly)
       return;
-		
-		this.check();
+
+    if (autoFlush)
+      this.check();
 
 		if (changeEventHandle) {
 			setTimeout(() => {
 				const { checked, index } = this.props;
-
 				changeEventHandle.call(this, value, checked, index);
 			}, 0);
 		}
   }
-	
+
 	check() {
 		const { cboxCheck, cboxUnCheck, checked } = this.props;
 		!checked ? cboxCheck(true) : cboxUnCheck(false);
@@ -69,7 +69,8 @@ Checkbox.propTypes = {
 Checkbox.defaultProps = {
   type: 'checkbox',                                 // checkbox 单选框
   checked: false,                                   // 不选中
-  readOnly: false                                   // 可进行选中操作
+  readOnly: false,                                  // 可进行选中操作
+  autoFlush: true                                   // 是否由组件刷新
 }
 
 export default Checkbox;
