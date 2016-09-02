@@ -58,7 +58,7 @@ class CheckboxGroup extends Component {
 
 			return item;
 		});
-    console.log(data, 'ggg');
+
 		return data;
   }
 
