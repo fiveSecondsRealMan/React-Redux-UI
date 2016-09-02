@@ -9,10 +9,16 @@ import ReactDOM from 'react-dom';
 import { bindActionCreators } from 'redux';
 import storeCreator from 'store';
 import * as actionCreator from 'action/actionCreator';
+
+/**
+  组件
+**/
 import Button from 'partials/Button';
 import Checkbox from 'partials/Checkbox';
 import Radio from 'partials/Radio';
 import CheckboxGroup from 'components/CheckboxGroup';
+import Input from 'partials/Input';
+import Textarea from 'partials/Textarea';
 
 // 初始化state
 const initialState = {
@@ -28,6 +34,9 @@ const store = storeCreator(initialState);
 // 定义绑定dispatch后的action
 const action = bindActionCreators(actionCreator, store.dispatch);
 
+/**
+  渲染 Button Component
+**/
 const renderButton = () => {
 	const state = store.getState();
 
@@ -43,8 +52,11 @@ const renderButton = () => {
 		</Button>,
 		document.getElementById('app')
 	)
-}
+};
 
+/**
+  渲染 Checkbox Component
+**/
 const renderCheckbox = () => {
 	const state = store.getState();
 
@@ -61,6 +73,9 @@ const renderCheckbox = () => {
 	);
 };
 
+/**
+  渲染 Radio Component
+**/
 const renderRadio = () => {
 	const state = store.getState();
 
@@ -77,9 +92,12 @@ const renderRadio = () => {
 	);
 };
 
+/**
+  渲染 CheckboxGroup Component
+**/
 const renderCheckboxGroup = () => {
 	const state = store.getState();
-
+	//console.log(state, 'ggg');
 	ReactDOM.render(
 		<CheckboxGroup
 			changeEventHandle={ function (values) { console.log(values, '选中的value'); } }
@@ -105,9 +123,49 @@ const renderCheckboxGroup = () => {
 		document.getElementById('app')
 	);
 };
+
+/**
+  渲染 Input Component
+**/
+const renderInput = () => {
+	const state = store.getState();
+
+	ReactDOM.render(
+	  <Input
+			type="number"
+		  className="input"
+			placeholder="请输入用户名"
+			isValidateValue={ false }
+			changeEventHandle={ function (value) { console.log(value); } }
+			value={ state.inputGetValue }
+			{ ...action }>
+		</Input>,
+		document.getElementById('app')
+	);
+};
+
+/**
+  渲染 TextArea
+**/
+const renderTextArea = () => {
+	const state = store.getState();
+
+	ReactDOM.render(
+		<Textarea
+		  className="wjj"
+			rows={ state.textareaAdaptRows }
+			changeEventHandle={ function (value) { console.log(value); } }
+			textareaAdaptRows={ action.textareaAdaptRows }>
+		</Textarea>,
+		document.getElementById('app')
+	);
+};
+
 //render();
 //renderCheckbox();
 //renderRadio();
-renderCheckboxGroup();
+//renderCheckboxGroup();
+//renderInput();
+renderTextArea();
 
-store.subscribe(renderCheckboxGroup);
+store.subscribe(renderTextArea);

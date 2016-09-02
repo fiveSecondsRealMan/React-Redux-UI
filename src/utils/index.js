@@ -2,7 +2,9 @@
   utils 入口文件
 **/
 
-export { getType } from './getType';
-export { objectToArray, values } from './objectDeal';
-export { replacePlaceholder } from './stringDeal';
-export { valuesToArray } from './mapDeal';
+export * from './getType';
+export * from './objectDeal';
+export * from './stringDeal';
+export * from './mapDeal';
+export * from './regexps';
+export * from './dom';

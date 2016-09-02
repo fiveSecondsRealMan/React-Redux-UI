@@ -1,6 +1,6 @@
 /**
  button reducer
- **/
+**/
 
 'use strict';
 
@@ -17,5 +17,5 @@ export default (state = false, action) => {
 				return action.disabled;
 		default:
 			return state;
-	} 	  
+	}
 }

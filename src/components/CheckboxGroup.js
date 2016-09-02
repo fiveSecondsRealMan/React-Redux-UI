@@ -6,41 +6,26 @@
 
 import React, { Component, PropTypes } from 'react';
 import Checkbox from 'partials/Checkbox';
-import { getType, objectToArray, values, replacePlaceholder, valuesToArray } from 'utils';
+import {
+  getType,
+  objectToArray,
+  values,
+  replacePlaceholder,
+  valuesToArray } from 'utils';
 
 class CheckboxGroup extends Component {
 	constructor(props) {
 		super(props);
-		this.initial();
+		this.init();
 	}
 
-	initial(nextProps) {
-		this.defaultCheckedValues = this.initDefaultCheckedValues(nextProps);
+	init(nextProps) {
+    this.defaultCheckedValues = (nextProps || this.props).defaultCheckedValues;
 		this.data = this.formatData(nextProps);
 	}
 
 	componentWillReceiveProps(nextProps) {
-		this.initial(nextProps);
-	}
-
-	formatDefaultCheckedValues(nextProps) {
-		const { defaultCheckedValues, separator } = (nextProps || this.props);
-
-		return getType(defaultCheckedValues) === 'string'
-			? defaultCheckedValues.split(separator)
-			: defaultCheckedValues;
-	}
-
-	initDefaultCheckedValues() {
-		const defaultCheckedValues = this.formatDefaultCheckedValues();
-		const result = new Map();
-
-		result.length = defaultCheckedValues.length;
-		defaultCheckedValues.forEach((item, index) => {
-			result.set(index, item);
-		});
-
-		return result;
+		this.init(nextProps);
 	}
 
   formatData(nextProps) {
@@ -54,8 +39,7 @@ class CheckboxGroup extends Component {
 			item.$text = replacePlaceholder(textTpl, item);
 			item.$value = replacePlaceholder(valueTpl, item);
 			item.$key = item.id || this.createID(index);
-			item.$checked = valuesToArray(this.defaultCheckedValues).indexOf(item.$value) >= 0;
-
+			item.$checked = this.defaultCheckedValues.indexOf(item.$value) >= 0;
 			return item;
 		});
 
@@ -67,25 +51,20 @@ class CheckboxGroup extends Component {
 	}
 
 	setValues(value, checked, checkboxIndex) {
+    const { separator } = this.props;
+    const valueExp = new RegExp('\\'+ ( separator + value ) +'');
+
 		if (checked)
-			this.defaultCheckedValues.delete(checkboxIndex);
-		else {
-			this.defaultCheckedValues.set(checkboxIndex, value);
-		}
+      this.defaultCheckedValues = this.defaultCheckedValues.replace(valueExp, '');
+    else
+      this.defaultCheckedValues += (separator + value);
 	}
 
 	handleChange(value, checked, checkboxIndex) {
 		const { cboxGroupCheck, separator } = this.props;
+
 		this.setValues.apply(this, arguments);
-		// console.log(Array
-		// .prototype
-		// .slice
-		// .call(this.defaultCheckedValues)
-		// .join(separator), 'wjj');
-		console.log(valuesToArray(this.defaultCheckedValues).join(separator), 'gg');
-		cboxGroupCheck(
-			valuesToArray(this.defaultCheckedValues).join(separator)
-		);
+		cboxGroupCheck(this.defaultCheckedValues);
 	}
 
   renderItems() {

@@ -1,6 +1,5 @@
 /**
-  部件
-  Radio(单选按钮)
+  Radio(单选按钮) | 不可再分组件
 **/
 
 'use strict';
@@ -8,14 +7,21 @@
 import React, { Component, PropTypes } from 'react';
 
 class Radio extends Component {
+	check() {
+		const { radioCheck, radioUnCheck, checked } = this.props;
+
+		!checked ? radioCheck(true) : radioUnCheck(false);
+	}
+
 	handleChange(e) {
 		const { readOnly, changeEventHandle, value } = this.props;
 
-		if (readOnly)
-			return;
-		
+		if (readOnly) {
+		  return;	
+		}
+
 		this.check();
-		
+
 		if (changeEventHandle) {
 			setTimeout(() => {
 				const { checked } = this.props;
@@ -23,12 +29,6 @@ class Radio extends Component {
 				changeEventHandle.call(this, value, checked);
 			}, 0);
 		}
-	}
-
-	check() {
-		const { radioCheck, radioUnCheck, checked } = this.props;
-
-		!checked ? radioCheck(true) : radioUnCheck(false); 		
 	}
 
 	render() {
@@ -44,15 +44,15 @@ class Radio extends Component {
 
 		return (
 			<label className={ className } style={{ style }}>
-				<input 
+				<input
 					type={ type }
 					value={ value }
 					checked={ checked }
 					readOnly={ readOnly }
 					onChange={ this.handleChange.bind(this) } />
-				{ text }	
+				{ text }
 			</label>
-		);		
+		);
 	}
 }
 

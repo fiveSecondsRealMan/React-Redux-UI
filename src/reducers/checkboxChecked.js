@@ -1,10 +1,10 @@
 /**
  checkbox reducer
- **/
+**/
 
 'use strict';
 
-import { 
+import {
 	CHECK_CBOX,
 	UNCHECK_CBOX
 } from 'constants/actionType';

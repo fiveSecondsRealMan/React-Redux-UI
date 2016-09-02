@@ -1,6 +1,5 @@
 /**
-  部件
-  CheckBox(单选按钮)
+  CheckBox(单选按钮) | 不可再分组件
 **/
 
 'use strict';
@@ -8,14 +7,20 @@
 import React, { Component, PropTypes } from 'react';
 
 class Checkbox extends Component {
+	check() {
+		const { cboxCheck, cboxUnCheck, checked } = this.props;
+		!checked ? cboxCheck(true) : cboxUnCheck(false);
+	}
+
   handleChange(e) {
     const { readOnly, changeEventHandle, value, autoFlush } = this.props;
 
     if (readOnly)
       return;
 
-    if (autoFlush)
-      this.check();
+    if (autoFlush) {
+		  this.check();	
+		}
 
 		if (changeEventHandle) {
 			setTimeout(() => {
@@ -24,11 +29,6 @@ class Checkbox extends Component {
 			}, 0);
 		}
   }
-
-	check() {
-		const { cboxCheck, cboxUnCheck, checked } = this.props;
-		!checked ? cboxCheck(true) : cboxUnCheck(false);
-	}
 
   render() {
     const {
