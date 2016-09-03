@@ -10,9 +10,9 @@ import {
 	CHECK_CBOX,
 	UNCHECK_CBOX,
 	CHECK_CBOXGROUP,
-	UNCHECK_CBOXGROUP,
 	CHECK_RADIO,
-	UNCHECK_RADIO
+	UNCHECK_RADIO,
+	GET_INPUT_VALUE
 } from 'constants/actionType';
 
 export function btnDisable (disabled) {
@@ -50,13 +50,6 @@ export function cboxGroupCheck (values) {
 	}
 }
 
-export function cboxGroupUnCheck (values) {
-	return {
-		type: UNCHECK_CBOXGROUP,
-		values
-	};
-}
-
 export function radioCheck (checked) {
 	return {
 		type: CHECK_RADIO,
@@ -70,3 +63,10 @@ export function radioUnCheck (checked) {
 		checked
 	};
 };
+
+export function iptGetValue (value) {
+	return {
+		type: GET_INPUT_VALUE,
+		value
+	};
+}

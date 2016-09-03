@@ -24,11 +24,14 @@ export const UNCHECK_CBOX = 'UNCHECK_CBOX';
  **/
 
 export const CHECK_CBOXGROUP = 'CHECK_CBOXGROUP';
-export const UNCHECK_CBOXGROUP = 'UNCHECK_CBOXGROUP';
-
 
 /**
  radiobox(单选框)前端交互
  **/
 export const CHECK_RADIO = 'CHECK_RADIO';
 export const UNCHECK_RADIO = 'UNCHECK_RADIO';
+
+/**
+ input(文本输入框)前端交互
+ **/
+ export const GET_INPUT_VALUE = 'GET_VALUE';

@@ -1,6 +1,5 @@
 /**
-  部件
-  CheckBox(单选按钮)
+  CheckBox(单选按钮) | 不可再分组件
 **/
 
 'use strict';

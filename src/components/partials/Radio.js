@@ -1,6 +1,5 @@
 /**
-  部件
-  Radio(单选按钮)
+  Radio(单选按钮) | 不可再分组件
 **/
 
 'use strict';
@@ -13,9 +12,9 @@ class Radio extends Component {
 
 		if (readOnly)
 			return;
-		
+
 		this.check();
-		
+
 		if (changeEventHandle) {
 			setTimeout(() => {
 				const { checked } = this.props;
@@ -28,7 +27,7 @@ class Radio extends Component {
 	check() {
 		const { radioCheck, radioUnCheck, checked } = this.props;
 
-		!checked ? radioCheck(true) : radioUnCheck(false); 		
+		!checked ? radioCheck(true) : radioUnCheck(false);
 	}
 
 	render() {
@@ -44,15 +43,15 @@ class Radio extends Component {
 
 		return (
 			<label className={ className } style={{ style }}>
-				<input 
+				<input
 					type={ type }
 					value={ value }
 					checked={ checked }
 					readOnly={ readOnly }
 					onChange={ this.handleChange.bind(this) } />
-				{ text }	
+				{ text }
 			</label>
-		);		
+		);
 	}
 }
 
