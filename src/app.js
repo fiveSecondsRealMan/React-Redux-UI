@@ -79,7 +79,7 @@ const renderRadio = () => {
 
 const renderCheckboxGroup = () => {
 	const state = store.getState();
-
+	//console.log(state, 'ggg');
 	ReactDOM.render(
 		<CheckboxGroup
 			changeEventHandle={ function (values) { console.log(values, '选中的value'); } }
