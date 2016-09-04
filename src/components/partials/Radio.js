@@ -7,11 +7,18 @@
 import React, { Component, PropTypes } from 'react';
 
 class Radio extends Component {
+	check() {
+		const { radioCheck, radioUnCheck, checked } = this.props;
+
+		!checked ? radioCheck(true) : radioUnCheck(false);
+	}
+
 	handleChange(e) {
 		const { readOnly, changeEventHandle, value } = this.props;
 
-		if (readOnly)
-			return;
+		if (readOnly) {
+		  return;	
+		}
 
 		this.check();
 
@@ -22,12 +29,6 @@ class Radio extends Component {
 				changeEventHandle.call(this, value, checked);
 			}, 0);
 		}
-	}
-
-	check() {
-		const { radioCheck, radioUnCheck, checked } = this.props;
-
-		!checked ? radioCheck(true) : radioUnCheck(false);
 	}
 
 	render() {

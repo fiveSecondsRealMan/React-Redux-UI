@@ -1,6 +1,6 @@
 /**
  checkboxGroup reducer
- **/
+**/
 
 'use strict';
 

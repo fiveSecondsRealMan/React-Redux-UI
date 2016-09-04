@@ -1,6 +1,6 @@
 /**
  radiobox reducer
- **/
+**/
 
 'use strict';
 
@@ -16,7 +16,6 @@ export default (state = false, action) => {
 		case UNCHECK_RADIO:
 			return action.checked;
 		default:
-			return state; 
+			return state;
 	}
 }
-

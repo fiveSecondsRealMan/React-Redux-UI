@@ -11,3 +11,12 @@ export function replacePlaceholder (placeholder, obj) {
 		return obj[key] == null ? '' : obj[key];
 	});
 }
+
+export function parseUpperToCable (str) {
+	const upperExp = /[A-Z]/g;
+	const cable = '-';
+
+	return str.replace(upperExp, match => {
+		return cable + match.toLowerCase();
+	});
+}

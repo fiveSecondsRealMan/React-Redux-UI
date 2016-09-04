@@ -22,8 +22,9 @@ class Input extends Component {
 		  changeEventHandle,
 		  iptGetValue } = this.props;
 
-		if (readOnly)
+		if (readOnly) {
 		  return;	
+		}
 
 		const value = e.target.value;
 

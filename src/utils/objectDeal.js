@@ -18,11 +18,21 @@ export function objectToArray (obj, ...itemKeep) {
 }
 
 export function values (obj) {
-  var array = [];
+  const array = [];
 
 	for (const key of Object.keys(obj)) {
-		array.push(obj[key]);
+	  array.push(obj[key]);
 	}
 
 	return array;
+}
+
+export function pick (obj, arr) {
+  const ret = {};
+
+	for (const value of arr) {
+	  ret[value] = obj[value];
+	}
+
+	return ret;
 }

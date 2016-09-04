@@ -1,13 +1,13 @@
 /**
  input reducer
- **/
+**/
 
 'use strict';
 
-import { GET_INPUT_VALUE } from 'constants/actionType';
+import { GET_VALUE_INPUT } from 'constants/actionType';
 
 export default (state = '', action) => {
-	return action.type === GET_INPUT_VALUE
+	return action.type === GET_VALUE_INPUT
 		? action.value
 		: state;
 }

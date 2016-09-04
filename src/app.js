@@ -18,6 +18,7 @@ import Checkbox from 'partials/Checkbox';
 import Radio from 'partials/Radio';
 import CheckboxGroup from 'components/CheckboxGroup';
 import Input from 'partials/Input';
+import Textarea from 'partials/Textarea';
 
 // 初始化state
 const initialState = {
@@ -51,7 +52,7 @@ const renderButton = () => {
 		</Button>,
 		document.getElementById('app')
 	)
-}
+};
 
 /**
   渲染 Checkbox Component
@@ -141,13 +142,30 @@ const renderInput = () => {
 		</Input>,
 		document.getElementById('app')
 	);
-}
+};
+
+/**
+  渲染 TextArea
+**/
+const renderTextArea = () => {
+	const state = store.getState();
+
+	ReactDOM.render(
+		<Textarea
+		  className="wjj"
+			rows={ state.textareaAdaptRows }
+			changeEventHandle={ function (value) { console.log(value); } }
+			textareaAdaptRows={ action.textareaAdaptRows }>
+		</Textarea>,
+		document.getElementById('app')
+	);
+};
 
 //render();
 //renderCheckbox();
 //renderRadio();
 //renderCheckboxGroup();
+//renderInput();
+renderTextArea();
 
-renderInput();
-
-store.subscribe(renderInput);
+store.subscribe(renderTextArea);

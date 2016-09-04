@@ -12,7 +12,8 @@ import {
 	CHECK_CBOXGROUP,
 	CHECK_RADIO,
 	UNCHECK_RADIO,
-	GET_INPUT_VALUE
+	GET_VALUE_INPUT,
+	ADAPT_ROWS_TEXTAREA
 } from 'constants/actionType';
 
 export function btnDisable (disabled) {
@@ -55,18 +56,25 @@ export function radioCheck (checked) {
 		type: CHECK_RADIO,
 		checked
 	}
-};
+}
 
 export function radioUnCheck (checked) {
   return {
 		type: UNCHECK_RADIO,
 		checked
 	};
-};
+}
 
 export function iptGetValue (value) {
 	return {
-		type: GET_INPUT_VALUE,
+		type: GET_VALUE_INPUT,
 		value
 	};
+}
+
+export function textareaAdaptRows (rows) {
+	return {
+		type: ADAPT_ROWS_TEXTAREA,
+		rows
+	}
 }
