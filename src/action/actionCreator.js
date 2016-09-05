@@ -10,9 +10,10 @@ import {
 	CHECK_CBOX,
 	UNCHECK_CBOX,
 	CHECK_CBOXGROUP,
-	UNCHECK_CBOXGROUP,
 	CHECK_RADIO,
-	UNCHECK_RADIO
+	UNCHECK_RADIO,
+	GET_VALUE_INPUT,
+	ADAPT_ROWS_TEXTAREA
 } from 'constants/actionType';
 
 export function btnDisable (disabled) {
@@ -50,23 +51,30 @@ export function cboxGroupCheck (values) {
 	}
 }
 
-export function cboxGroupUnCheck (values) {
-	return {
-		type: UNCHECK_CBOXGROUP,
-		values
-	};
-}
-
 export function radioCheck (checked) {
 	return {
 		type: CHECK_RADIO,
 		checked
 	}
-};
+}
 
 export function radioUnCheck (checked) {
   return {
 		type: UNCHECK_RADIO,
 		checked
 	};
-};
+}
+
+export function iptGetValue (value) {
+	return {
+		type: GET_VALUE_INPUT,
+		value
+	};
+}
+
+export function textareaAdaptRows (rows) {
+	return {
+		type: ADAPT_ROWS_TEXTAREA,
+		rows
+	}
+}
