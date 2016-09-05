@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+.positionDetails (@width, @height, @leftValue: 50%, @topValue: 50%) {
+  width: @width;
+  height: @height;
+  left: @leftValue;
+  top: @topValue;
+  .prefixTranslate(-50%);
+}
+
+.prefixTranslate (@value) {
+  transform: translate(@value, @value);
+  -moz-transform: translate(@value, @value);
+  -webkit-transform: translate(@value, @value);
+}
+
+
+.position (@type: absolute, @width: auto, @height: auto) {
+  position: @type;
+  .positionDetails(@arguments);
+}

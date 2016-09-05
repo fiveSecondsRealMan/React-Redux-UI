@@ -5,7 +5,7 @@
 'use strict';
 
 import React, { Component, PropTypes } from 'react';
-import { numberExp } from 'utils';
+import { numberExp, pick } from 'utils';
 
 class Input extends Component {
 	handleChange(e) {
@@ -23,7 +23,7 @@ class Input extends Component {
 		  iptGetValue } = this.props;
 
 		if (readOnly) {
-		  return;	
+		  return;
 		}
 
 		const value = e.target.value;
@@ -44,27 +44,20 @@ class Input extends Component {
 	}
 
   render() {
-		const {
-			className,
-			style,
-			type,
-			value,
-			placeholder,
-			readOnly,
-			onFocus,
-			onBlur
-		} = this.props;
+		const inputProps = [
+			'className',
+			'style',
+			'type',
+			'value',
+			'placeholder',
+			'readOnly',
+			'onFocus',
+			'onBlur'
+		];
 
     return (
 			<input
-			className={ className }
-			style={ style }
-			type={ type }
-			value={ value }
-			placeholder={ placeholder }
-			readOnly={ readOnly }
-			onBlur={ onBlur }
-			onFocus={ onFocus }
+			{ ...pick(this.props, inputProps) }
 			onChange={ this.handleChange.bind(this) } />
 		);
 	}

@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+* { margin: 0; padding: 0; }
+
+button, input, textarea, select {
+  outline: none;
+}
+
+a {
+  color: #333;
+  text-decoration: none;
+
+  img {
+    border: 0;
+  }
+}
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+.clearfix {
+  display: block;
+  & :after {
+    display: block;
+    content: '';
+    clear: both;
+    visibility: hidden;
+    height: 0;
+    font-size: 0;
+  }
+}

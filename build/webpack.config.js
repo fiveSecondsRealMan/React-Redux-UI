@@ -42,11 +42,11 @@ const alias = Object.assign({}, {
 	// store
 	'store': path.join(devPath, 'store'),
 
-	// styles
-	'styles': path.join(devPath, 'statics/styles'),
+	// less
+	'themes': path.join(devPath, 'statics', 'themes'),
 
 	// scripts
-	'scripts': path.join(devPath, 'statics/scripts'),
+	'scripts': path.join(devPath, 'statics', 'scripts'),
 
 	// utils
 	'utils': path.join(devPath, 'utils')
@@ -71,7 +71,7 @@ export default {
     // 别名
     'alias': alias,
 		// 默认文件扩展名
-    'extensions': ['', '.js', '.sass', '.css', '.jpg', '.png']
+    'extensions': ['', '.js', '.less', '.css', '.jpg', '.png']
   },
 
   module: {
@@ -91,8 +91,11 @@ export default {
 					'name': 'images/[name].[ext]'
 				}
 			}, {
-				'test': /\.css/i,
-				'loader': 'style!css',
+				'test': /\.less/i,
+				'loader': ExtractTextPlugin.extract(
+					'css?sourceMap!' +
+          'less?sourceMap'
+				),
 				'include': devPath
 			}
     ]
