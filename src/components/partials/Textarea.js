@@ -5,15 +5,24 @@
 'use strict';
 
 import React, { Component, PropTypes } from 'react';
-import { pick, cloneNode, computedStyle } from 'utils';
+import { pick, computedStyle } from 'utils';
 
 class Textarea extends Component {
-  getHeight() {
-    const el = this.el;
-    const paddingTop = parseInt(computedStyle(el, 'paddingTop'));
-    const paddingBottom = parseInt(computedStyle(el, 'paddingBottom'));
+  getSingleLineHeight() {
+    const cloneNode = this.el.cloneNode();
 
-    return el.clientHeight - paddingTop - paddingBottom;
+    cloneNode.rows = 1;
+    cloneNode.style.minHeight = 'inherit';
+
+    document.body.appendChild(cloneNode);
+
+    const paddingTop = parseInt(computedStyle(cloneNode, 'paddingTop'));
+    const paddingBottom = parseInt(computedStyle(cloneNode, 'paddingBottom'));
+    const clientHeight = cloneNode.clientHeight;
+
+    document.body.removeChild(cloneNode);
+
+    return clientHeight - paddingTop - paddingBottom;
   }
 
   getScrollHeight() {
@@ -22,22 +31,11 @@ class Textarea extends Component {
 
   adaptHeight() {
     const { rows, textareaAdaptRows } = this.props;
-    const height = this.getHeight();
+    const singleLineHeight = this.getSingleLineHeight();
     const scrollHeight = this.getScrollHeight();
-    const changeRows = Math.floor(scrollHeight / height);
-    // if (changeRows > rows) {
-    //   this.el.style.height = scrollHeight + 'px';
-    //   console.log(this.el.clientHeight, 'ggg');
-    // }
+    const changeRows = Math.floor(scrollHeight / singleLineHeight);
 
-    if (changeRows > rows) {
-      textareaAdaptRows(changeRows);
-      this.el.style.overflowY = 'auto';
-    } else {
-      this.el.style.overflowY = 'hidden';
-    }
-
-    //changeRows >= rows && textareaAdaptRows(changeRows);
+    changeRows > rows && textareaAdaptRows(changeRows);
   }
 
   handleChange(e) {
@@ -49,9 +47,11 @@ class Textarea extends Component {
 
     this.adaptHeight();
 
-    // setTimeout(() => {
-    //   changeEventHandle.call(this, e.target.value);
-    // }, 0);
+    const value = e.target.value;
+
+    setTimeout(() => {
+      changeEventHandle.call(this, value);
+    }, 0);
 	}
 
 	render() {
@@ -85,7 +85,8 @@ Textarea.propTypes = {
 
 Textarea.defaultProps = {
   defaultValue: '',
-  style: { resize: 'none', outline: 'none', height: 'auto', overflow: 'hidden' },
+  rows: 10,
+  style: { resize: 'none', outline: 'none', overflowY: 'hidden' },
 	readOnly: false
 };
 

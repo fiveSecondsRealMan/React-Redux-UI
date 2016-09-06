@@ -5,7 +5,6 @@
 'use strict';
 
 import React, { Component, PropTypes } from 'react';
-import 'styles/button';
 
 class Button extends Component {
   disable() {

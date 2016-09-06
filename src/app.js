@@ -13,12 +13,21 @@ import * as actionCreator from 'action/actionCreator';
 /**
   组件
 **/
+
 import Button from 'partials/Button';
 import Checkbox from 'partials/Checkbox';
 import Radio from 'partials/Radio';
-import CheckboxGroup from 'components/CheckboxGroup';
+import CheckboxGroup from 'partials/CheckboxGroup';
 import Input from 'partials/Input';
 import Textarea from 'partials/Textarea';
+import Dialog from 'components/Dialog/';
+
+/**
+  全局css
+**/
+
+import 'themes/reset';
+
 
 // 初始化state
 const initialState = {
@@ -37,6 +46,7 @@ const action = bindActionCreators(actionCreator, store.dispatch);
 /**
   渲染 Button Component
 **/
+
 const renderButton = () => {
 	const state = store.getState();
 
@@ -57,6 +67,7 @@ const renderButton = () => {
 /**
   渲染 Checkbox Component
 **/
+
 const renderCheckbox = () => {
 	const state = store.getState();
 
@@ -76,6 +87,7 @@ const renderCheckbox = () => {
 /**
   渲染 Radio Component
 **/
+
 const renderRadio = () => {
 	const state = store.getState();
 
@@ -95,6 +107,7 @@ const renderRadio = () => {
 /**
   渲染 CheckboxGroup Component
 **/
+
 const renderCheckboxGroup = () => {
 	const state = store.getState();
 	//console.log(state, 'ggg');
@@ -127,6 +140,7 @@ const renderCheckboxGroup = () => {
 /**
   渲染 Input Component
 **/
+
 const renderInput = () => {
 	const state = store.getState();
 
@@ -147,6 +161,7 @@ const renderInput = () => {
 /**
   渲染 TextArea
 **/
+
 const renderTextArea = () => {
 	const state = store.getState();
 
@@ -161,11 +176,22 @@ const renderTextArea = () => {
 	);
 };
 
+/**
+  渲染 Dialog
+**/
+const renderDialog = () => {
+  ReactDOM.render(
+		<Dialog className="dialog"></Dialog>,
+		document.getElementById('app')
+	);
+}
+
 //render();
 //renderCheckbox();
 //renderRadio();
 //renderCheckboxGroup();
 //renderInput();
-renderTextArea();
+//renderTextArea();
+renderDialog();
 
-store.subscribe(renderTextArea);
+store.subscribe(renderDialog);
