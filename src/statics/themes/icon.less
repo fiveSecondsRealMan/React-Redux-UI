@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+@import "../../statics/themes/icon";
+
+.size (@width, @height) {
+  width: @width;
+  height: @height;
+}
+
+.fontFamily (@family) {
+  font-family: @family;
+}
+
+.icon {
+  display: block;
+  color: #999;
+}
+
+.icon-16 {
+  .size(16px, 16px);
+}
+
+.icon-32 {
+  .size(32px, 32px);
+}
+
+.icon-64 {
+  .size(64px, 64px)
+}
+
+.icon-arial {
+  .fontFamily('arial');
+}
+
+.icon-microsoftyahei {
+  .fontFamily('microsoft Yahei');
+}

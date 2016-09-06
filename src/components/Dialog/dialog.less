@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-import "./mixins/mixins";
+@import "../../statics/themes/mixins/mixins";
 
 .borderRadius (@borderRadius) {
   -webkit-border-radius: @borderRadius;
@@ -15,5 +15,9 @@ import "./mixins/mixins";
 .dialog {
   .border();
   .borderRadius(4px);
-  .position(); 
+  .position();
+}
+
+.dialog-header {
+  border-bottom: 1px solid #999;
 }

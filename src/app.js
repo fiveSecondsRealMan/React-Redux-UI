@@ -17,10 +17,10 @@ import * as actionCreator from 'action/actionCreator';
 import Button from 'partials/Button';
 import Checkbox from 'partials/Checkbox';
 import Radio from 'partials/Radio';
-import CheckboxGroup from 'components/CheckboxGroup';
+import CheckboxGroup from 'partials/CheckboxGroup';
 import Input from 'partials/Input';
 import Textarea from 'partials/Textarea';
-import Dialog from 'components/Dialog';
+import Dialog from 'components/Dialog/';
 
 /**
   全局css

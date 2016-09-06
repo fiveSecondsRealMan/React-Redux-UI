@@ -14,8 +14,7 @@
   -webkit-transform: translate(@value, @value);
 }
 
-
 .position (@type: absolute, @width: auto, @height: auto) {
   position: @type;
-  .positionDetails(@arguments);
+  .positionDetails(@width, @height);
 }

@@ -5,10 +5,22 @@
 'use strict';
 
 import React, { Component, PropTypes } from 'react';
-import { pick } from 'utils';
-import 'themes/dialog';
+import './dialog.less';
+import DialogHeader from './DialogHeader';
 
 class Dialog extends Component {
+  static propTypes = {
+    className: PropTypes.string,
+    dialogHeaderClassName: PropTypes.string,
+    dialogFooterClassName: PropTypes
+  };
+
+  static defaultProps = {
+    className: 'dialog',
+    dialogHeaderClassName: 'dialog-header',
+    dialogFooterClassName: 'dialog-footer'
+  };
+
   render() {
     const dialogProps = [
       'className'
