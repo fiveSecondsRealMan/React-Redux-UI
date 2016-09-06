@@ -20,7 +20,7 @@ import Radio from 'partials/Radio';
 import CheckboxGroup from 'partials/CheckboxGroup';
 import Input from 'partials/Input';
 import Textarea from 'partials/Textarea';
-import Dialog from 'components/Dialog/';
+import Dialog from 'components/Popup/Dialog';
 
 /**
   全局css
@@ -181,7 +181,10 @@ const renderTextArea = () => {
 **/
 const renderDialog = () => {
   ReactDOM.render(
-		<Dialog className="dialog"></Dialog>,
+		<Dialog
+		  style={{ width: '450px' }}
+
+		</Dialog>,
 		document.getElementById('app')
 	);
 }

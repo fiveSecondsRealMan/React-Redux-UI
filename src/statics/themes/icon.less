@@ -5,15 +5,88 @@
 .size (@width, @height) {
   width: @width;
   height: @height;
+  line-height: @height;
 }
 
 .fontFamily (@family) {
   font-family: @family;
 }
 
+.translateX (@x) {
+  -webkit-transform: translateX(@x);
+  -moz-transform: translateX(@x);
+  transform: translateX(@x);
+}
+
+.translateY (@y) {
+  -webkit-transform: translateY(@y);
+  -moz-transform: translateY(@y);
+  transform: translateY(@y);
+}
+
+.horizontalAlign (@hAlign) when(@hAlign = left) {
+  left: 0;
+}
+
+.horizontalAlign (@hAlign) when(@hAlign = left) {
+  left: 50%;
+  .translateX(-50%);
+}
+
+.horizontalAlign (@hAlign) when(@hAlign = right) {
+  right: 0;
+}
+
+.verticalAlign (@vAlign) when(@vAlign = top) {
+  top: 0;
+}
+
+.verticalAlign (@vAlign) when(@vAlign = middle) {
+  top: 50%;
+  .translateY(-50%);
+}
+
+.verticalAlign (@vAlign) when(@vAlign = bottom) {
+  bottom: 0;
+}
+
 .icon {
-  display: block;
-  color: #999;
+  display: inline-block;
+}
+
+.icon-appearance {
+  position: absolute;
+  border-radius: 100% 100%;
+  color: #fff;
+  font-size: 30px;
+  font-weight: 700;
+  background: rgba(0,0,0,.6);
+  text-align: center;
+  cursor: pointer;
+}
+
+.icon-align-left {
+  .horizontalAlign(left);
+}
+
+.icon-align-center {
+  .horizontalAlign(center);
+}
+
+.icon-align-right {
+  .horizontalAlign(right);
+}
+
+.icon-align-top {
+  .verticalAlign(top);
+}
+
+.icon-align-middle {
+  .verticalAlign(middle);
+}
+
+.icon-align-bottom {
+  .verticalAlign(bottom);
 }
 
 .icon-16 {
@@ -25,7 +98,7 @@
 }
 
 .icon-64 {
-  .size(64px, 64px)
+  .size(64px, 64px);
 }
 
 .icon-arial {
