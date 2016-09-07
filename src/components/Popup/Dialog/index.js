@@ -1,44 +1,50 @@
 /**
-  Dialog(对话框) | 容器组件
+  对话框组件 | 容器组件
 **/
 
-'use strict';
+'use static';
 
 import React, { Component, PropTypes } from 'react';
+import Popup from 'components/Popup/';
+import DialogHeader from './DialogHeader'
 import './dialog.less';
-import DialogHeader from './DialogHeader';
 
-class Dialog extends Component {
-  static propTypes = {
-    className: PropTypes.string,
-    dialogHeaderClassName: PropTypes.string,
-    dialogFooterClassName: PropTypes
-  };
-
-  static defaultProps = {
-    className: 'dialog',
-    dialogHeaderClassName: 'dialog-header',
-    dialogFooterClassName: 'dialog-footer'
-  };
-
+class Dialog extends Popup {
   render() {
-    const dialogProps = [
-      'className'
-    ];
+    const {
+      className,
+      style,
+      dialogHeaderClassName,
+      dialogFooterClassName,
+      clickEventHandle } = this.props;
 
     return (
-      <div { ...pick(this.props, dialogProps) }>
-        <span className='gs'>span</span>
-        <h1 className='hs'>h1</h1>
+      <div ref={ el => this.el = el } className={ className } style={ style }>
+        <div className='dialog-inner'>
+          <DialogHeader
+            className={ dialogHeaderClassName }
+            isClose={ true }
+            clickEventHandle={ this.hide.bind(this) }  >
+            分享设置
+          </DialogHeader>
+        </div>
       </div>
     );
   }
 }
 
-Dialog.propTypes = {
-  className: PropTypes.string
-};
+// 扩展Dialog静态属性propTypes
+Object.assign(Dialog.propTypes = {}, Popup.propTypes, {
+  dialogHeaderClassName: PropTypes.string,
+  dialogFooterClassName: PropTypes.string,
+  hideFunc: PropTypes.func
+});
 
-Dialog.defaultProps = {};
+// 扩展Dialog静态属性defaultProps
+Object.assign(Dialog.defaultProps = {}, Popup.defaultProps, {
+  className: 'dialog',
+  dialogHeaderClassName: 'dialog-header',
+  dialogFooterClassName: 'dialog-footer'
+});
 
 export default Dialog;
