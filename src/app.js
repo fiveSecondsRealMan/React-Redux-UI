@@ -182,8 +182,9 @@ const renderTextArea = () => {
 const renderDialog = () => {
   ReactDOM.render(
 		<Dialog
-		  style={{ width: '450px' }}
-
+		  width={ 450 }
+			title="分享设置"
+			titleHeight={ 55 }>
 		</Dialog>,
 		document.getElementById('app')
 	);

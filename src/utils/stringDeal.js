@@ -5,17 +5,21 @@
 'use strict';
 
 import { getType } from './getType';
+import { placeholderExp, upperExp, templateExp } from './regexps';
 
-export function replacePlaceholder (placeholder, obj) {
-	const placeholderExp = /\{([^{}]+)\}/g;
-
-	return placeholder.replace(placeholderExp, (match, key) => {
-		return obj[key] == null ? '' : obj[key];
-	});
+function replaceStr (strExp) {
+	return function (template, obj) {
+		return template.replace(strExp, (match, key) => {
+			return obj[key] == null ? '' : obj[key];
+		});
+	}
 }
 
+export const replacePlaceholder = replaceStr(placeholderExp);
+
+export const replaceTemplate = replaceStr(templateExp);
+
 export function parseUpperToCable (str) {
-	const upperExp = /[A-Z]/g;
 	const cable = '-';
 
 	return str.replace(upperExp, match => {
