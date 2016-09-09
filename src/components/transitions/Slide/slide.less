@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+.head {
+  width: 300px;
+  height: 20px;
+  color: #ddd;
+  background: green;
+}
+
+.wjj {
+  border: 1px solid green;
+  height: 300px;
+  color: red;
+}
+
+.slide-enter {
+  max-height: 0;
+  transition: max-height .5s linear;
+}
+
+.slide-enter-active {
+  max-height: 500px;
+}
+
+.slide-leave {
+  max-height: 500px;
+  transition: max-height .5s linear;
+}
+
+.slide-leave-active {
+  max-height: 0;
+}
