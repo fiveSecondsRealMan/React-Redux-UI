@@ -22,7 +22,7 @@ import Input from 'partials/Input';
 import Textarea from 'partials/Textarea';
 import Dialog from 'components/Popup/Dialog';
 import Slide from 'components/transitions/Slide';
-
+import Carousel from 'components/transitions/Carousel';
 /**
   全局css
 **/
@@ -179,6 +179,7 @@ const renderTextArea = () => {
 /**
   渲染 Dialog
 **/
+
 const renderDialog = () => {
   ReactDOM.render(
 		<Dialog
@@ -189,6 +190,10 @@ const renderDialog = () => {
 		document.getElementById('app')
 	);
 }
+
+/**
+  渲染 Slide
+**/
 
 const renderSlide = () => {
 	const spreadItems = [
@@ -224,8 +229,31 @@ const renderSlide = () => {
 	);
 }
 
-renderSlide();
+/**
+  渲染 Carousel
+**/
+const renderCarousel = () => {
+  ReactDOM.render(
+		<Carousel
+		  width={ 800 }
+			height={ 75 }
+			data={ [
+				{ text: 'wjj1' },
+				{ text: 'wjj2' },
+				{ text: 'wjj3' },
+				{ text: 'wjj4' },
+				{ text: 'wjj5' },
+				{ text: 'wjj6' }
+			] }>
+		</Carousel>,
+		document.getElementById('app')
+	);
+}
 
+renderCarousel();
+
+
+//renderSlide();
 //render();
 //renderCheckbox();
 //renderRadio();

@@ -26,6 +26,7 @@ function getStyles(props) {
   return {
     root: {
       width: replaceTemplate('${width}px', props),
+      minHeight: replaceTemplate('${spreadItemHeaderHeight}px', props),
       marginBottom: replaceTemplate('${marginBottom}px', props)
     },
     header: {
@@ -39,7 +40,6 @@ function getStyles(props) {
     },
     body: {
       borderSizing: 'border-box',
-      overflow: 'hidden',
       backgroundColor: replaceTemplate('${spreadItemBodyBgColor}', props)
     },
     bodyInner: {
@@ -92,7 +92,12 @@ class Slide extends Component {
   }
 
   createChildrenComponent(spreadItems) {
-    const { root, header, body, bodyInner, bodyItem } = getStyles(this.props);
+    const {
+      root,
+      header,
+      body,
+      bodyInner,
+      bodyItem } = getStyles(this.props);
 
     const bodyContainer = (spreadItem, idx) => {
       return (
@@ -114,13 +119,15 @@ class Slide extends Component {
       const shownKey = 'isShown' + index;
 
       return (
-        <div key={ index } className="spread-item" style={ root }>
+        <div key={ index } className="spread-item" style={ !spreadItem.selected ? Object.assign({}, root, { overflow: 'hidden' }) : root }>
           <div className="spread-item-header" style={ header } onClick={ this.handleClick.bind(this, index) }>{ spreadItem.title }</div>
           <ReactCSSTransitionGroup
             transitionName="slide"
-            transitionEnterTimeout={ 500 }
-            transitionLeaveTimeout={ 500 }>
-          { this.state[shownKey] && bodyContainer(spreadItem) }
+            transitionAppear={ true }
+            transitionAppearTimeout={ 500 }
+            transitionEnterTimeout={ 400 }
+            transitionLeaveTimeout={ 400 }>
+            { this.state[shownKey] && bodyContainer(spreadItem) }
           </ReactCSSTransitionGroup>
         </div>
       );
@@ -133,9 +140,9 @@ class Slide extends Component {
       [shownKey + index]: !this.state[shownKey + index]
     };
 
-    Object.keys(this.state)
-      .filter((key, idx) => idx !== index)
-      .forEach(key => joining[key] = false);
+    // Object.keys(this.state)
+    //   .filter((key, idx) => idx !== index)
+    //   .forEach(key => joining[key] = false);
 
     this.setState(joining);
   }
@@ -146,7 +153,8 @@ class Slide extends Component {
 
     return (
       <div className={ className }>
-        { components }
+          { components }
+
       </div>
     );
   }

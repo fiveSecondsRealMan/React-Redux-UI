@@ -1,32 +1,19 @@
 @charset "UTF-8";
 
-.head {
-  width: 300px;
-  height: 20px;
-  color: #ddd;
-  background: green;
-}
-
-.wjj {
-  border: 1px solid green;
-  height: 300px;
-  color: red;
-}
-
 .slide-enter {
   max-height: 0;
-  transition: max-height .5s linear;
+  transition: max-height .4s linear;
 }
 
-.slide-enter-active {
+.slide-enter.slide-enter-active {
   max-height: 500px;
 }
 
 .slide-leave {
   max-height: 500px;
-  transition: max-height .5s linear;
+  transition: max-height .4s linear;
 }
 
-.slide-leave-active {
+.slide-leave.slide-leave-active {
   max-height: 0;
 }
