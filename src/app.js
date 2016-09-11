@@ -21,13 +21,13 @@ import CheckboxGroup from 'partials/CheckboxGroup';
 import Input from 'partials/Input';
 import Textarea from 'partials/Textarea';
 import Dialog from 'components/Popup/Dialog';
-
+import Slide from 'components/transitions/Slide';
+import Carousel from 'components/transitions/Carousel';
 /**
   全局css
 **/
 
 import 'themes/reset';
-
 
 // 初始化state
 const initialState = {
@@ -179,22 +179,87 @@ const renderTextArea = () => {
 /**
   渲染 Dialog
 **/
+
 const renderDialog = () => {
   ReactDOM.render(
 		<Dialog
-		  style={{ width: '450px' }}
-
+		  width={ 450 }
+			title="分享设置"
+			titleHeight={ 55 }>
 		</Dialog>,
 		document.getElementById('app')
 	);
 }
 
+/**
+  渲染 Slide
+**/
+
+const renderSlide = () => {
+	const spreadItems = [
+		{
+			title: '文件',
+			content: [
+				{ value: 0, text: '所有文件' },
+				{ value: 1, text: '分享给我' },
+				{ value: 2, text: '我的分享' },
+				{ value: 3, text: '上传/下载' },
+				{ value: 4, text: 'Transmission的文件' },
+				{ value: 5, text: 'OwnCloud的文件' }
+			]
+		}, {
+			title: '照片',
+			content: [
+				{ value: 0, text: '所有照片' },
+				{ value: 1, text: '相册' },
+				{ value: 2, text: '视频' },
+				{ value: 3, text: '分享' }
+			]
+		}
+	];
+
+	ReactDOM.render(
+		<Slide
+		  width={ 230 }
+		  spreadItems={ spreadItems }
+			defaultSelectedSpreadIndexs="0"
+		>
+		</Slide>,
+		document.getElementById('app')
+	);
+}
+
+/**
+  渲染 Carousel
+**/
+const renderCarousel = () => {
+  ReactDOM.render(
+		<Carousel
+		  width={ 800 }
+			height={ 75 }
+			data={ [
+				{ text: 'wjj1' },
+				{ text: 'wjj2' },
+				{ text: 'wjj3' },
+				{ text: 'wjj4' },
+				{ text: 'wjj5' },
+				{ text: 'wjj6' }
+			] }>
+		</Carousel>,
+		document.getElementById('app')
+	);
+}
+
+renderCarousel();
+
+
+//renderSlide();
 //render();
 //renderCheckbox();
 //renderRadio();
 //renderCheckboxGroup();
 //renderInput();
 //renderTextArea();
-renderDialog();
+//renderDialog();
 
-store.subscribe(renderDialog);
+store.subscribe(renderSlide);

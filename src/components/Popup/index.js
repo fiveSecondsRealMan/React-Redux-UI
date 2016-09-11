@@ -25,6 +25,11 @@ Popup.propTypes = {
   isModal: PropTypes.bool,
 
   /**
+   * 是否含关闭按钮
+  */
+  isCloseBtn: PropTypes.bool,
+
+  /**
    * 是否延时自动关闭
   */
   isDelayAutoClose: PropTypes.bool,
@@ -37,7 +42,8 @@ Popup.propTypes = {
 
 Popup.defaultProps = {
   isModal: true,
-  isDelayAutoClose: false
+  isDelayAutoClose: false,
+  isCloseBtn: true
 };
 
 export default Popup;
