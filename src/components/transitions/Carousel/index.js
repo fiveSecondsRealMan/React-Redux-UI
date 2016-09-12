@@ -150,25 +150,25 @@ export default class Carousel extends Component {
     );
   }
 
-  detectBlockIndex(nextBlockIndex) {
-    if (nextBlockIndex < 0) {
-      return 0;
-    } else if (nextBlockIndex >= this.blockCount) {
-      return this.blockCount - 1;
-    }
-
-    return nextBlockIndex;
-  }
-
-	detectItemIndex(nextItemIndex) {
-		if (nextItemIndex >= (this.currentBlockIndex + 1) * this.everyBlockItemCount) {
-			return (this.currentBlockIndex + 1) * this.everyBlockItemCount;
-		} else if (nextItemIndex < (this.currentBlockIndex - 1) * this.everyBlockItemCount) {
-			return nextItemIndex + this.everyBlockItemCount;
-		}
-
-		return nextItemIndex;
-	}
+  // detectBlockIndex(nextBlockIndex) {
+  //   if (nextBlockIndex < 0) {
+  //     return 0;
+  //   } else if (nextBlockIndex >= this.blockCount) {
+  //     return this.blockCount - 1;
+  //   }
+  //
+  //   return nextBlockIndex;
+  // }
+  //
+	// detectItemIndex(nextItemIndex) {
+	// 	if (nextItemIndex >= (this.currentBlockIndex + 1) * this.everyBlockItemCount) {
+	// 		return (this.currentBlockIndex + 1) * this.everyBlockItemCount;
+	// 	} else if (nextItemIndex < (this.currentBlockIndex - 1) * this.everyBlockItemCount) {
+	// 		return nextItemIndex + this.everyBlockItemCount;
+	// 	}
+  //
+	// 	return nextItemIndex;
+	// }
 
   moveTo(nextItemIndex) {
     const { itemWidth, itemGap, data} = this.props;

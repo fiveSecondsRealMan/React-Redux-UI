@@ -9,6 +9,7 @@ import ReactDOM from 'react-dom';
 import { bindActionCreators } from 'redux';
 import storeCreator from 'store';
 import * as actionCreator from 'action/actionCreator';
+import { preload } from 'utils';
 
 /**
   组件
@@ -23,6 +24,8 @@ import Textarea from 'partials/Textarea';
 import Dialog from 'components/Popup/Dialog';
 import Slide from 'components/transitions/Slide';
 import Carousel from 'components/transitions/Carousel';
+import ImageSwipe from 'components/transitions/ImageSwipe';
+
 /**
   全局css
 **/
@@ -222,8 +225,7 @@ const renderSlide = () => {
 		<Slide
 		  width={ 230 }
 		  spreadItems={ spreadItems }
-			defaultSelectedSpreadIndexs="0"
-		>
+			defaultSelectedSpreadIndexs="0">
 		</Slide>,
 		document.getElementById('app')
 	);
@@ -263,9 +265,29 @@ const renderCarousel = () => {
 	);
 }
 
-renderCarousel();
+const renderImageSwipe = () => {
+	preload([
+		'http://s2.mogucdn.com/p2/160809/63653807_847g1dea78ek6kie3j9f0hjj71b7h_800x533.jpg_468x468.jpg',
+		'http://s2.mogucdn.com/p2/160809/63653807_847g1dea78ek6kie3j9f0hjj71b7h_800x533.jpg_468x468.jpg',
+		'http://s2.mogucdn.com/p2/160809/63653807_847g1dea78ek6kie3j9f0hjj71b7h_800x533.jpg_468x468.jpg',
+		'http://s2.mogucdn.com/p2/160809/63653807_847g1dea78ek6kie3j9f0hjj71b7h_800x533.jpg_468x468.jpg',
+		'http://s2.mogucdn.com/p2/160809/63653807_847g1dea78ek6kie3j9f0hjj71b7h_800x533.jpg_468x468.jpg',
+		'http://s2.mogucdn.com/p2/160809/63653807_847g1dea78ek6kie3j9f0hjj71b7h_800x533.jpg_468x468.jpg',
+	], 5000).then(imgList => {
+		ReactDOM.render(
+			<ImageSwipe
+				width={ 800 }
+				height={ 600 }
+				imgList={ imgList }>
+			</ImageSwipe>,
+			document.getElementById('app')
+		);
+	});
+};
 
+renderImageSwipe();
 
+//renderCarousel();
 //renderSlide();
 //render();
 //renderCheckbox();
@@ -275,4 +297,4 @@ renderCarousel();
 //renderTextArea();
 //renderDialog();
 
-store.subscribe(renderSlide);
+//store.subscribe(renderSlide);
