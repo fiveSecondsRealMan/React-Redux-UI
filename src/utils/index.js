@@ -8,3 +8,4 @@ export * from './stringDeal';
 export * from './mapDeal';
 export * from './regexps';
 export * from './dom';
+export * from './preloader';
