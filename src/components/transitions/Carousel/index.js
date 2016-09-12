@@ -20,7 +20,8 @@ function getStyles (props) {
     },
 
     carouselRootInner: {
-      position: 'absolute'
+      position: 'absolute',
+      transition: 'transform .2s linear'
     },
 
     arrowItemContainer: {
@@ -83,35 +84,45 @@ function getTransformStyle () {
 export default class Carousel extends Component {
   constructor(props) {
     super(props);
+		const { data } = this.props;
+
     this.transformStyle = getTransformStyle();
-    this.itemLength = this.props.data.length;
-    this.realWidth = this.getCarouselRealWidth();
-    this.maxItemLength = this.getCarouselMaxIndex();
+		this.realWidth = this.getRealWidth();
+		this.everyBlockItemCount = this.getEveryBlockItemCountByRealWidth();
+		this.blockCount = this.getBlockCountByItemCount();
 
-    this.maxIndex = this.itemLength > this.maxItemLength
-      ? this.itemLength - 1
-      : this.maxItemLength - 1;
+		this.currentItemIndex = data.length >= this.everyBlockItemCount
+		 ? this.everyBlockItemCount - 1
+		 : data.length - 1;
 
-    this.currentIndex = this.itemLength > this.maxItemLength
-      ? this.maxItemLength - 1
-      : this.maxIndex;
+		this.prevItemIndex = this.currentItemIndex;
+		this.currentBlockIndex = 0;
   }
 
-  getCarouselMaxIndex() {
-    const { itemWidth, itemGap, width } = this.props;
+	getRealWidth() {
+		const { data, itemWidth, itemGap } = this.props;
 
-    return Math.floor(width / (itemWidth + itemGap));
-  }
+		return data.length * (itemWidth + itemGap);
+	}
 
-  getCarouselRealWidth() {
-    const { itemWidth, itemGap, arrowItemContainerWidth, width } = this.props;
-    const carouselWidth = width - arrowItemContainerWidth * 2;
-    const carouselRealWidth = this.itemLength * itemWidth + this.itemLength * itemGap;
+	getWidth() {
+		const { width, arrowItemContainerWidth } = this.props;
 
-    return carouselRealWidth < carouselWidth
-      ? carouselWidth
-      : carouselRealWidth;
-  }
+		return width - arrowItemContainerWidth * 2;
+	}
+
+	getEveryBlockItemCountByRealWidth() {
+		const { itemWidth, itemGap } = this.props;
+		const width = this.getWidth();
+
+		return Math.floor((width + itemGap) / (itemWidth + itemGap));
+	}
+
+	getBlockCountByItemCount() {
+		const { data } = this.props;
+
+		return Math.ceil(data.length / this.everyBlockItemCount);
+	}
 
   createItemComponents() {
     const { item } = getStyles(this.props);
@@ -119,7 +130,7 @@ export default class Carousel extends Component {
 
     return data.map((dataItem, index) => {
       return (
-        <div key={ index } className="carousel-item" style={ item }></div>
+        <div key={ index } className="carousel-item" style={ item }>{ dataItem.text }</div>
       );
     });
   }
@@ -131,30 +142,55 @@ export default class Carousel extends Component {
     const carouselNewRootInner = Object.assign({}, carouselRootInner, { width: this.realWidth });
 
     return (
-      <div ref={ el => this.el = el } className="carousel" style={ carouselRoot }>
-        <div className="carousel-inner" style={ carouselNewRootInner }>
+      <div className="carousel" style={ carouselRoot }>
+        <div ref={ el => this.el = el } className="carousel-inner" style={ carouselNewRootInner }>
           { itemComponents }
         </div>
       </div>
     );
   }
 
-  detectIndex(nextCurrentIndex) {
-    if (nextCurrentIndex < 0) {
+  detectBlockIndex(nextBlockIndex) {
+    if (nextBlockIndex < 0) {
       return 0;
-    } else if (nextCurrentIndex > this.maxIndex) {
-      return this.maxIndex;
+    } else if (nextBlockIndex >= this.blockCount) {
+      return this.blockCount - 1;
     }
 
-    return nextCurrentIndex;
+    return nextBlockIndex;
   }
 
-  moveTo(nextCurrentIndex) {
-    const { itemWidth, itemGap } = this.props;
+	detectItemIndex(nextItemIndex) {
+		if (nextItemIndex >= (this.currentBlockIndex + 1) * this.everyBlockItemCount) {
+			return (this.currentBlockIndex + 1) * this.everyBlockItemCount;
+		} else if (nextItemIndex < (this.currentBlockIndex - 1) * this.everyBlockItemCount) {
+			return nextItemIndex + this.everyBlockItemCount;
+		}
 
-    nextCurrentIndex = this.detectIndex(nextCurrentIndex);
-    this.move(-(itemWidth + itemGap));
-    this.currentIndex = nextCurrentIndex;
+		return nextItemIndex;
+	}
+
+  moveTo(nextItemIndex) {
+    const { itemWidth, itemGap, data} = this.props;
+		const blockItems = this.everyBlockItemCount * (this.currentBlockIndex + 1) > data.length
+		  ? data.length
+			: this.everyBlockItemCount * (this.currentBlockIndex + 1);
+
+    this.currentItemIndex = nextItemIndex;
+
+		if (nextItemIndex < this.everyBlockItemCount - 1) {
+			this.currentBlockIndex--;
+			this.currentItemIndex = this.everyBlockItemCount - 1;
+		} else if (nextItemIndex >= blockItems) {
+			if (nextItemIndex >= data.length) {
+				this.currentItemIndex = data.length - 1;
+				this.currentBlockIndex = this.blockCount - 1;
+			} else {
+				this.currentBlockIndex++;
+			}
+		}
+
+		this.move(-(this.currentItemIndex - this.prevItemIndex) * (itemWidth + itemGap));
   }
 
   move(dist) {
@@ -162,11 +198,11 @@ export default class Carousel extends Component {
   }
 
   handleLeftArrowClick() {
-    this.moveTo(this.currentIndex - 1);
+    this.moveTo(this.currentItemIndex - 1);
   }
 
   handleRightArrowClick() {
-    this.moveTo(this.currentIndex + 1);
+    this.moveTo(this.currentItemIndex + 1);
   }
 
   render() {

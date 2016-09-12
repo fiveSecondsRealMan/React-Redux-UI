@@ -235,15 +235,28 @@ const renderSlide = () => {
 const renderCarousel = () => {
   ReactDOM.render(
 		<Carousel
-		  width={ 800 }
+		  width={ 905 }
 			height={ 75 }
 			data={ [
-				{ text: 'wjj1' },
-				{ text: 'wjj2' },
-				{ text: 'wjj3' },
-				{ text: 'wjj4' },
-				{ text: 'wjj5' },
-				{ text: 'wjj6' }
+				{ text: '1' },
+				{ text: '2' },
+				{ text: '3' },
+				{ text: '4' },
+				{ text: '5' },
+				{ text: '6' },
+				{ text: '7' },
+				{ text: '8' },
+				{ text: '9' },
+				{ text: '10' },
+				{ text: '11' },
+				{ text: '12' },
+				{ text: '13' },
+				{ text: '14' },
+				{ text: '15' },
+				{ text: '16' },
+				{ text: '17' },
+				{ text: '18' },
+				{ text: '19' }
 			] }>
 		</Carousel>,
 		document.getElementById('app')
