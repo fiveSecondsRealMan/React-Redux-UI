@@ -21,6 +21,7 @@ import Radio from 'partials/Radio';
 import CheckboxGroup from 'partials/CheckboxGroup';
 import Input from 'partials/Input';
 import Textarea from 'partials/Textarea';
+import Mask from 'partials/Mask';
 import Dialog from 'components/Popup/Dialog';
 import Slide from 'components/transitions/Slide';
 import Carousel from 'components/transitions/Carousel';
@@ -285,8 +286,16 @@ const renderImageSwipe = () => {
 	});
 };
 
-renderImageSwipe();
+const renderMask = () => {
+	ReactDOM.render(
+		<Mask />,
+		document.getElementById('app')
+	);
+}
 
+renderMask();
+
+//renderImageSwipe();
 //renderCarousel();
 //renderSlide();
 //render();
