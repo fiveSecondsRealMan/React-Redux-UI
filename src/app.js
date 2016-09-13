@@ -294,18 +294,21 @@ const renderMask = () => {
 	);
 };
 
-const renderDrag = () => {
-	ReactDOM.render(
-		<Drag />,
-		document.getElementById('app')
-	)
-};
-
-renderDrag();
+// const renderDrag = () => {
+// 	ReactDOM.render(
+// 		<Drag
+// 		  onDrop={ function (e) { console.log(e); } }>
+// 			<div style={{ width: 100, height: 100, backgroundColor: 'green' }}></div>
+// 		</Drag>	,
+// 		document.getElementById('app')
+// 	)
+// };
+//
+// renderDrag();
 //renderMask();
 
 //renderImageSwipe();
-//renderCarousel();
+renderCarousel();
 //renderSlide();
 //render();
 //renderCheckbox();

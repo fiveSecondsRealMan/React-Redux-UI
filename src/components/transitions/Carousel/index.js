@@ -4,6 +4,7 @@
 
 import React, { Component, PropTypes } from 'react';
 import { replaceTemplate } from 'utils';
+import Drag from 'partials/Drag';
 
 function getStyles (props) {
   return {
@@ -130,7 +131,12 @@ export default class Carousel extends Component {
 
     return data.map((dataItem, index) => {
       return (
-        <div key={ index } className="carousel-item" style={ item }>{ dataItem.text }</div>
+        <Drag
+          key={ index }
+          className="carousel-item"
+          style={ item }>
+          { dataItem.text }
+        </Drag>
       );
     });
   }
@@ -149,26 +155,6 @@ export default class Carousel extends Component {
       </div>
     );
   }
-
-  // detectBlockIndex(nextBlockIndex) {
-  //   if (nextBlockIndex < 0) {
-  //     return 0;
-  //   } else if (nextBlockIndex >= this.blockCount) {
-  //     return this.blockCount - 1;
-  //   }
-  //
-  //   return nextBlockIndex;
-  // }
-  //
-	// detectItemIndex(nextItemIndex) {
-	// 	if (nextItemIndex >= (this.currentBlockIndex + 1) * this.everyBlockItemCount) {
-	// 		return (this.currentBlockIndex + 1) * this.everyBlockItemCount;
-	// 	} else if (nextItemIndex < (this.currentBlockIndex - 1) * this.everyBlockItemCount) {
-	// 		return nextItemIndex + this.everyBlockItemCount;
-	// 	}
-  //
-	// 	return nextItemIndex;
-	// }
 
   moveTo(nextItemIndex) {
     const { itemWidth, itemGap, data} = this.props;
