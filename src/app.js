@@ -22,6 +22,7 @@ import CheckboxGroup from 'partials/CheckboxGroup';
 import Input from 'partials/Input';
 import Textarea from 'partials/Textarea';
 import Mask from 'partials/Mask';
+import Drag from 'partials/Drag'
 import Dialog from 'components/Popup/Dialog';
 import Slide from 'components/transitions/Slide';
 import Carousel from 'components/transitions/Carousel';
@@ -291,9 +292,17 @@ const renderMask = () => {
 		<Mask />,
 		document.getElementById('app')
 	);
-}
+};
 
-renderMask();
+const renderDrag = () => {
+	ReactDOM.render(
+		<Drag />,
+		document.getElementById('app')
+	)
+};
+
+renderDrag();
+//renderMask();
 
 //renderImageSwipe();
 //renderCarousel();
